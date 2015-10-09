@@ -1,8 +1,15 @@
-# Ruby Study
+class: center, middle
+# メソッドについて
 
-## メソッドについて
+---
 
-### インスタンスメソッド
+class: center, middle
+## インスタンスメソッド
+
+---
+
+class: left, middle
+### インスタンスメソッドとは
 
 - 何かしらのクラスのインスタンスから呼び出すメソッド
 
@@ -18,7 +25,15 @@ foo.bar
 => :hoge
 ```
 
-### クラスメソッド
+---
+
+class: center, middle
+## クラスメソッド
+
+---
+
+class: left, middle
+### クラスメソッドとは
 
 - クラスから呼び出すメソッド
 
@@ -33,7 +48,15 @@ Foo.bar
 => :hoge
 ```
 
-### 関数的メソッド
+---
+
+class: center, middle
+## 関数的メソッド
+
+---
+
+class: left, middle
+### 関数的メソッドとは
 
 - レシーバを省略して呼ばれるメソッド
 
@@ -50,6 +73,13 @@ p 'a'
 => "a"
 ```
 
+---
+
+class: center, middle
+### その他に
+
+---
+class: left, middle
 #### privateメソッド
 
 - クラス内でprivateで定義したメソッド
@@ -72,21 +102,40 @@ foo.bar
 => :hoge
 ```
 
-#### ちなみに
+---
 
-- 先ほどの`puts`、`print`、`p`は`Object`クラスのprivateメソッドにあたる
+class: center, middle
+### ちなみに
 
+先ほどの`puts`、`print`、`p`は`Object`クラスのprivateメソッドにあたる
 
-## 特異クラス・特異メソッドについて
+---
+
+class: center, middle
+## 特異クラス・特異メソッド
+
+---
+
+class: left, middle
+### 特異クラス・特異メソッドとは
 
 - 特定のオブジェクトにしか存在しないクラス
 - そのクラスにあるメソッドを`特異メソッド`と呼びます
 - 逆に特異クラスは特異メソッドのために存在するクラス
-- 奥深いので詳細は本など読んでください
 
-### 特異クラス
+*これについては奥深いので詳細は本など読んでください*
 
-- コードで説明すると。。。
+---
+
+class: center, middle
+### とりあえずコードで説明すると
+
+---
+
+class: left, middle
+### 特異クラスとは
+
+- こんな感じです
 
 ```ruby
 class Foo
@@ -110,10 +159,18 @@ foo.singleton_class.superclass.superclass
 => Object
 ```
 
+---
+
+class: left, middle
 ### 特異メソッド
 
 - 特異クラス内で定義されているメソッド
-- 定義方法は以下のような方法がある
+- 定義方法はいくつか方法がある
+
+---
+
+class: left, middle
+### 特異メソッド
 
 #### 定義方法１
 
@@ -137,6 +194,11 @@ end
 foo.bar
 => :hoge
 ```
+
+---
+
+class: left, middle
+### 特異メソッド
 
 #### 定義方法２
 
@@ -164,3 +226,19 @@ end
 foo.bar
 => :hoge
 ```
+
+---
+
+class: center, middle
+## 何がいいたいかというと
+
+---
+
+class: center, middle
+### クラスメソッドは特異メソッドである
+
+ということ
+
+頭の片隅に入れておくと、幸せになれるかも
+
+---

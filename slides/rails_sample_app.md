@@ -1,30 +1,51 @@
-# Railsでサンプルアプリを作ってみる
+class: center, middle
+# Railsで
 
-- 作るアプリ
-  - 毎日メールで送っている日報のテンプレートを作るアプリ
-- 環境
-  - Rails4
-  - mysql
-  - その他gem
-- 前提
-  - railsの開発環境があるものとする
+##　サンプルアプリを作ってみる
 
-## プロジェクトを作成
+---
 
-- 詳しいオプションはこちら
-  - http://railsdoc.com/rails
+class: left, middle
+##　こんな感じで進めます
+
+### 作るアプリ
+
+- 毎日メールで送っている日報のテンプレートを作るアプリ
+
+### 開発環境
+- Rails4
+- sqlite
+- その他gem
+
+### 前提
+- railsの開発環境があるものとする
+
+---
+
+class: center, middle
+# さっそくはじめます
+
+---
+
+class: left, middle
+## プロジェクトを作成する
+
 
 ```
 $ rails new nippou --database sqlite3 --javascript jquery --skip-bundle
 ```
 
-## setupファイルを編集
+- 詳しいオプションはこちら
+  - http://railsdoc.com/rails
+
+---
+
+class: left, middle
+## setupファイルを編集し、実行する
 
 - 初期状態だと`rake db:setup`が実行されるので、変更しておく
   - `db:setup`は`db:create`、`db:schema:load`、`db:seed`を実行する
 - この辺は新規のアプリかなど、どう開発を進めていくかによって変わってくる
-
-## setupを実行する
 
 ```
 $ bin/setup
@@ -38,8 +59,16 @@ The Gemfile's dependencies are satisfied
 == Restarting application server ==
 ```
 
+---
+
+class: center, middle
 ## 開発周りのgemをinstallする
 
+*※基本的にgemの選定ははじめのうちに行うほうが良いと思います*
+
+---
+
+class: left, middle
 ### guardをインストール
 
 - https://github.com/guard/guard
@@ -58,20 +87,27 @@ group :development, :test do
 end
 ```
 
+#### インストールする
+
 `bundle install`を実行（`bundle`だけでもOK）
 
 ```
 $ bundle
 ```
 
-guardのセットアップする
+---
+
+class: left, middle
+### guardをインストール
+
+#### guardのセットアップする
 
 ```
 $ bundle exec guard init
 17:23:06 - INFO - Writing new Guardfile to /Users/b07032/workspace/odajima-ca/nippou/Guardfile
 ```
 
-動作確認
+#### 動作確認する
 
 ```
 $ bundle exec guard
@@ -80,11 +116,16 @@ $ bundle exec guard
 [1] guard(main)>
 ```
 
+---
+
+class: left, middle
 ### rspecをインストール
 
 - https://github.com/rspec/rspec-rails
 - https://github.com/guard/guard-rspec
 - ユニットテストのgem
+
+#### Gemfileを編集
 
 `development`グループに追記する
 
@@ -95,11 +136,20 @@ group :development, :test do
 end
 ```
 
+#### インストールする
+
 `bundle install`を実行（`bundle`だけでもOK）
 
 ```
 $ bundle
 ```
+
+---
+
+class: left, middle
+### rspecをインストール
+
+#### rspecのセットアップする
 
 `rspec:install`を実行する
 
@@ -117,7 +167,7 @@ $ rails generate rspec:install
 $ rm -rf test
 ```
 
-rspecの動作確認
+#### 動作確認する
 
 ```
 $ bundle exec rspec
@@ -128,18 +178,28 @@ Finished in 0.00035 seconds (files took 0.40606 seconds to load)
 0 examples, 0 failures
 ```
 
-rspecを自動実行するため、guardを設定する
+---
+
+class: left, middle
+### rspecをインストール
+
+#### rspecを自動実行するため、guardを設定する
 
 ```
 $ bundle exec guard init rspec
 17:33:58 - INFO - rspec guard added to Guardfile, feel free to edit it
 ```
 
+---
+
+class: left, middle
 ### rubocopをインストールする
 
 - https://github.com/bbatsov/rubocop
 - https://github.com/yujinakayama/guard-rubocop
 - コードが規約通り書かれているかの静的コード解析ツール
+
+#### Gemfileを編集
 
 `development`グループに追記する
 
@@ -150,13 +210,20 @@ group :development, :test do
 end
 ```
 
+#### インストールする
+
 `bundle install`を実行（`bundle`だけでもOK）
 
 ```
 $ bundle
 ```
 
-rubocopの動作確認
+---
+
+class: left, middle
+### rubocopをインストールする
+
+#### rubocopの動作確認
 
 - 初期設定だと、いろいろダメだよと言われます。
 - なので`.rubocop.yml`を作成し、お好みの設定をします。
@@ -169,23 +236,31 @@ Inspecting 4 files
 4 files inspected, no offenses detected
 ```
 
-rubocopを自動実行するため、guardを設定する
+#### rubocopを自動実行するため、guardを設定する
 
 ```
 $ bundle exec guard init rubocop
 17:40:12 - INFO - rubocop guard added to Guardfile, feel free to edit it
 ```
 
+---
+
+class: left, middle
 ### factory_girlをインストールする
 
 - https://github.com/thoughtbot/factory_girl_rails
 - テストデータを作成するgem
+
+
+#### Gemfileを編集
 
 ```
 group :development, :test do
   gem 'factory_girl_rails'
 end
 ```
+
+#### インストールする
 
 `bundle install`を実行（`bundle`だけでもOK）
 
@@ -195,10 +270,15 @@ $ bundle
 
 その他設定は不要
 
+---
+
+class: left, middle
 ### annotate_modelsをインストールする
 
 - https://github.com/ctran/annotate_models
 - 各種モデルファイルやテストファイルにテーブルのスキーマ情報をコメントするgem
+
+#### Gemfileを編集
 
 ```
 group :development, :test do
@@ -206,11 +286,20 @@ group :development, :test do
 end
 ```
 
+#### インストールする
+
 `bundle install`を実行（`bundle`だけでもOK）
 
 ```
 $ bundle
 ```
+
+---
+
+class: left, middle
+### annotate_modelsをインストールする
+
+#### annotateのセットアップする
 
 `rake db:migrate`のたびにコメントを更新するように、設定ファイルをインストールする
 
@@ -219,20 +308,24 @@ $ rails g annotate:install
 create  lib/tasks/auto_annotate_models.rake
 ```
 
-動作を確認
+#### 動作確認する
 
 ```
 $ rake db:migrate
 Nothing to annotate.
 ```
 
-その他設定は不要
+*その他設定は不要*
 
+---
 
+class: left, middle
 ### rails_best_practicesをインストールする
 
 - https://github.com/railsbp/rails_best_practices
 - railsの使い方などをチェックするツール
+
+#### Gemfileを編集
 
 ```
 group :development, :test do
@@ -241,13 +334,20 @@ group :development, :test do
 end
 ```
 
+#### インストールする
+
 `bundle install`を実行（`bundle`だけでもOK）
 
 ```
 $ bundle
 ```
 
-動作確認
+---
+
+class: left, middle
+### rails_best_practicesをインストールする
+
+#### 動作確認する
 
 ```
 $ bundle exec rails_best_practices .
@@ -258,10 +358,7 @@ Please go to http://rails-bestpractices.com to see more useful Rails Best Practi
 No warning found. Cool!
 ```
 
-rails_best_practicesを自動実行するため、guardを設定する
-
-- こんなエラーになるので、下記を参考にして対応
-- https://github.com/logankoester/guard-rails_best_practices/issues/9
+#### rails_best_practicesを自動実行するため、guardを設定する
 
 ```
 $ bundle exec guard init rails_best_practices
@@ -269,7 +366,15 @@ $ bundle exec guard init rails_best_practices
 18:42:32 - ERROR - Error is: No such file or directory @ rb_sysopen - /Users/b07032/.guard/templates/rails_best_practices
 ```
 
-guardでの動作を確認
+- こんなエラーになるので、下記を参考にして対応
+- https://github.com/logankoester/guard-rails_best_practices/issues/9
+
+---
+
+class: left, middle
+### rails_best_practicesをインストールする
+
+#### guardでの動作を確認
 
 ```
 $ bundle exec guard
@@ -283,16 +388,22 @@ No warning found. Cool!
 18:46:30 - INFO - Guard is now watching at '/Users/b07032/workspace/odajima-ca/nippou'
 ```
 
-### 開発前準備のまとめ
+---
+
+class: left, middle
+## 開発前準備のまとめ
 
 - ここでとり上げたgem以外にも多数のgemがあります。
-- railsの場合は、generatorを多様することが多いです。
-- 出来る限り最初に、どのgemを使っていいくかなど決めておくとあとあと幸せになれるかと思います。
-  - 例えばテンプレートは'erb'なのか、それとも`haml`、`slim`を使うのかなど
+- railsの場合は、generatorを多様することが多いので
+  - 出来る限り最初に、どのgemを使っていいくかなど決めておくとあとあと幸せになれるかと思います。
+    - 例えばテンプレートは'erb'なのか、それとも`haml`、`slim`を使うのかなど
 
 - 開発するときは`guard`を立ち上げながら、開発していきます。
   - テスト駆動開発(TDD)、振舞駆動開発(BDD)とか良くいいますが、それです。
 
+---
+
+class: left, middle
 ## 日報テンプレートアプリを作成する
 
 - アプリの内容
@@ -307,9 +418,17 @@ No warning found. Cool!
   - ログイン機能
   - 見た目など
 
+---
+
+class: center, middle
+## では、さっそく
+
+---
+
+class: left, middle
 ### カテゴリマスタを作成する
 
-generateコマンドを実行
+#### generateコマンドを実行
 
 ```
 $ rails g model category name:string
@@ -322,7 +441,7 @@ $ rails g model category name:string
       create        spec/factories/categories.rb
 ```
 
-migrateionを修正する
+#### migrateionを修正する
 
 ```
 $ vi db/migrate/20151008092735_create_categories.rb
@@ -338,7 +457,12 @@ class CreateCategories < ActiveRecord::Migration
 end
 ```
 
-migrateを実行する
+---
+
+class: left, middle
+### カテゴリマスタを作成する
+
+#### migrateを実行する
 
 ```
 $ rake db:migrate
@@ -350,6 +474,9 @@ $ rake db:migrate
 Annotated (1): Category
 ```
 
+---
+
+class: left, middle
 ### カテゴリマスタを修正する
 
 guardを起動しておくと下記のようになるはず
@@ -391,6 +518,11 @@ Please go to http://rails-bestpractices.com to see more useful Rails Best Practi
 No warning found. Cool!
 ```
 
+---
+
+class: left, middle
+### カテゴリマスタを修正する
+
 要件を組み込みつつ、プログラムとして悪い点を修正していきます
 
 下記のようになればOKです
@@ -414,11 +546,14 @@ Please go to http://rails-bestpractices.com to see more useful Rails Best Practi
 No warning found. Cool!
 ```
 
+---
+
+class: left, middle
 ### カテゴリマスタを登録する
 
-- マスタデータを登録する方法はいろいろありますが、ここでは`seed`を使います。
+マスタデータを登録する方法はいろいろありますが、ここでは`seed`を使います。
 
-db/seeds.rbを修正する
+#### db/seeds.rbを修正する
 
 ```
  #
@@ -430,7 +565,7 @@ db/seeds.rbを修正する
 +p Category.create(name: 'その他')
 ```
 
-seedを実行する
+#### seedを実行する
 
 ```
 $ rake db:seed
@@ -439,15 +574,18 @@ $ rake db:seed
 #<Category id: 3, name: "その他", created_at: "2015-10-08 10:03:54", updated_at: "2015-10-08 10:03:54">
 ```
 
+---
+
+class: left, middle
 ### タスク機能を作成する
 
-generatorでベースを作成します
+#### scaffoldします
 
 ```
 $ rails g scaffold task category:belongs_to name:string description:text status:string completed_at:datetime
 ```
 
-migrationを修正し、`db:migrate`を実行します
+#### migrationを修正し、`db:migrate`を実行します
 
 ```
 $ rake db:migrate
@@ -459,10 +597,14 @@ $ rake db:migrate
 Annotated (1): Task
 ```
 
+---
+
+class: left, middle
 ### タスクモデルを修正する
 
-- 先ほどのカテゴリマスタと同じ要領で修正します
-- 下記のような出力になればOK
+先ほどのカテゴリマスタと同じ要領で修正します
+
+下記のような出力になればOK
 
 ```
 19:41:16 - INFO - Running: spec/models/task_spec.rb
@@ -472,10 +614,15 @@ Finished in 0.24851 seconds (files took 4.68 seconds to load)
 3 examples, 0 failures
 ```
 
+---
+
+class: left, middle
 ### rubocopの警告に対応する
 
 - ここはどこまで規約に則っていくかによります
 - 必要に応じて`.rubocop.yml`を修正することもありです。
+
+`no offenses detected`となればOKです
 
 ```
 24 files inspected, 210 offenses detected
@@ -483,11 +630,9 @@ Finished in 0.24851 seconds (files took 4.68 seconds to load)
 24 files inspected, no offenses detected
 ```
 
-### タスクのCRUD機能を修正する
+---
 
-- 先ほどのカテゴリマスタと同じ要領で修正します
-- 修正内容はコミットログを参照
-
+class: left, middle
 ### RailsBestPracticesに対応する
 
 下記のような警告が出ているので対応します
@@ -519,6 +664,9 @@ Please go to http://rails-bestpractices.com to see more useful Rails Best Practi
 No warning found. Cool!
 ```
 
+---
+
+class: left, middle
 ## 動作を確認してみる
 
 ```
@@ -534,15 +682,19 @@ $ rails s
 
 `http://localhost:3000`にアクセスしてみます。
 
+---
 
-
-## 開発開始
+class: left, middle
+## 本格的な開発開始
 
 ### トップページをタスク一覧に変更する
 
-- 下記のように修正
+- 次のように修正
 - コードを追記したら、specにも追記を心がけること
 
+---
+
+class: left, middle
 ```
 $ git diff
 diff --git a/config/routes.rb b/config/routes.rb
@@ -568,22 +720,31 @@ index 09533db..4719759 100644
      end
 ```
 
+---
+
+class: left, middle
 ### タスクとカテゴリを紐つける
 
 - 詳細はコミットログを参照
 
+---
+
+class: left, middle
 ### ステータスを選択項目に変更する
 
 - 詳細はコミットログを参照
 - rails4.1の機能（Enum）
 
-statusをstringで作ってしまったので、migrationを作成する
+---
+
+class: left, middle
+#### statusをstringで作ってしまったので、migrationを作成する
 
 ```
 $ rails g migration change_status_type_in_tasks
 ```
 
-カラムの変更内容を記載します
+##### カラムの変更内容を記載します
 
 ```ruby
 class ChangeStatusTypeInTasks < ActiveRecord::Migration
@@ -593,6 +754,7 @@ class ChangeStatusTypeInTasks < ActiveRecord::Migration
 end
 ```
 
+##### migrateを実行します
 ```
 $ rake db:migrate
 == 20151009020109 ChangeStatusTypeInTasks: migrating ==========================
@@ -603,29 +765,44 @@ $ rake db:migrate
 Annotated (1): Task
 ```
 
-statusにenum機能を付与します
+---
+
+class: left, middle
+#### statusにenum機能を付与します
 
 - 詳細はコミットログを参照
 
+---
+
+class: left, middle
 ### タスクの作業開始機能を追加する
 
 - tasksコントローラーに`doing`アクションを追加し、ステータスをdoingに変更するようにします
 - 詳細はコミットログを参照
 
+---
+
+class: left, middle
 ### タスクの作業完了機能を追加する
 
 - tasksコントローラーに`done`アクションを追加し、ステータスをdoneに変更するようにします
 - doneにした際にcompleted_atに日付を入れるようにする
 - 詳細はコミットログを参照
 
-### タスクの作業完了機能を追加する
+---
 
+class: left, middle
 ### 「本日の日報」テンプレートを作成する
 
 - 日報メールを送る際のテンプレートを作成する
 - コピペしてメールに添付するようなイメージ
 
-generateする
+---
+
+class: left, middle
+### 「本日の日報」テンプレートを作成する
+
+#### generateする
 
 ```
 $ rails g controller daily_reports index
@@ -649,7 +826,12 @@ $ rails g controller daily_reports index
       create      app/assets/stylesheets/daily_reports.scss
 ```
 
-まずはroutesを修正します
+---
+
+class: left, middle
+### 「本日の日報」テンプレートを作成する
+
+#### routesを修正します
 
 ```
 get 'daily_reports/index'
@@ -657,7 +839,7 @@ get 'daily_reports/index'
 resources :daily_reports, only: [:index]
 ```
 
-routing用のspecファイルを作成
+#### routing用のspecファイルを作成
 
 ```
 $ vi spec/routing/daily_reports_routing_spec.rb
@@ -675,7 +857,12 @@ RSpec.describe DailyReportsController, type: :routing do
 end
 ```
 
-まずは、最低限でspecとコードの警告などがないように修正する
+---
+
+class: left, middle
+### 「本日の日報」テンプレートを作成する
+
+#### まずは、最低限でspecとコードの警告などがないように修正する
 
 ```
 12:30:27 - INFO - Run all
@@ -700,6 +887,9 @@ Please go to http://rails-bestpractices.com to see more useful Rails Best Practi
 No warning found. Cool!
 ```
 
+---
+
+class: left, middle
 ### レポート内容を実装する
 
 - 実行日（リクエスト日）を基準にタスクを一覧表示する
@@ -708,12 +898,16 @@ No warning found. Cool!
   - 未着手のタスク
 - 詳細はコミットログを参照
 
+---
+
+class: left, middle
+### レポート内容を実装する
+
 #### ポイント
 
-- テストしやすいコードを書くこと
+テストしやすいコードを書くこと
 
-- 例えば下記のように変数の値をテストしやすく記述する
-  - 例が少し悪いですが。
+例えば下記のように変数の値をテストしやすく記述する（例が少し悪いですが。）
 
 ```ruby
 class DailyReportsController < ApplicationController
@@ -736,3 +930,6 @@ end
       expect(assigns(:done_tasks)).to match_array done_tasks
     end
 ```
+
+---
+
